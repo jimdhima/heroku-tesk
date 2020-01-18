@@ -1,13 +1,22 @@
-// Solution 2: Customer Relations
+// Solution 1: Sequelize the burger assignment
 // ===========================================
 
-// Step 1: Created a Customer model in ./models/customer.js
-// Step 2: Updated the Burger model to have a hasOne(models.Customer) relation
-// Step 3: Updated the handlebars to display a customers name if there's a 'Customers' property on the Burger
-// Step 4: Updated queries in burgerController for updating a burger to add the CustomerId
-// Step 5: Updated findAll query  in burger_controller for burgers to "include" the customer
-// Step 6: Updated findAll query in burger_controller to order returned burgers by burger_name.
+// This solutions adds sequelize functionality to Burger
+// This is the minimum required work for students
 
+// Step 1: Deleted the models, db, and config folder
+
+// Step 2: `Ran sequelize init:config & sequelize init:models` in the command line to initialize the project
+
+// Step 2: Edited the new config.json file to accommodate our database connection
+
+// Step 3: Made a burger model with a burger_name attribute of type DataTypes.String, and a devoured attribute of type
+// DataTypes.Boolean. Set devoured to have a defaultValue of false
+
+// Step 5: Removed any reference to the old ORM in burgers_controller
+
+// Step 6: Utilized Sequelize ORM methods in place of the deleted ORM functions
+//         in burgers_controller.js
 
 var express = require("express");
 
@@ -29,7 +38,7 @@ app.engine("handlebars", exphbs({
 }));
 app.set("view engine", "handlebars");
 
-var routes = require("./controllers/burgers_controller");
+var routes = require("./controllers/burgers_controller.js");
 
 app.use(routes);
 
@@ -37,6 +46,6 @@ app.use(routes);
 var PORT = process.env.PORT || 3000;
 db.sequelize.sync().then(function() {
   app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
+    console.log("App now listening on port:", PORT);
   });
 });
